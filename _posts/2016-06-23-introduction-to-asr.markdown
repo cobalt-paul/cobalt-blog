@@ -42,16 +42,11 @@ Digital audio is most commonly a series of scalar integer values called 'samples
 It's worth briefly noting the important specialized terms that we will be using later on. These definitions are simplified and sometimes contain outright lies (I will attempt to note when I have simplified something); they are intended to provide a conceptual handle on what's being done.
 
 
-* acoustic model
-A model which takes audio as input, and gives a probability distribution over phonemes as output.
-* phoneme
-A phoneme is a fundamental unit of speech production. When you say "cat", it is pronounced (in Arpabet) K AE T. K, AE and T are phonemes. 
-* phone
-An actual example of someone saying a phoneme.
-* lexicon
-Speech relies on a (mostly) hand-curated list of pronunciations called a "lexicon". The lexicon will contain hundreds of thousands of words and their phonetic transcription.
-* language model
-A model which takes a sentence as input and gives a likelihood of observing that sentence. The sentence "the cat in the hat" is much more likely than "cat the in hat the", and a good language model will assign the first sentence a (much) higher likelihood.
+* acoustic model : A model which takes audio as input, and gives a probability distribution over phonemes as output.
+* phoneme : A phoneme is a fundamental unit of speech production. When you say "cat", it is pronounced (in Arpabet) K AE T. K, AE and T are phonemes. 
+* phone : An actual example of someone saying a phoneme.
+* lexicon : Speech relies on a (mostly) hand-curated list of pronunciations called a "lexicon". The lexicon will contain hundreds of thousands of words and their phonetic transcription.
+* language model : A model which takes a sentence as input and gives a likelihood of observing that sentence. The sentence "the cat in the hat" is much more likely than "cat the in hat the", and a good language model will assign the first sentence a (much) higher likelihood.
 
 
 
@@ -66,6 +61,7 @@ This explanation is heavily simplified, and diving into the details will make ma
 ## <a name='am'></a>How Acoustic Models work
 
 An acoustic model works roughly like this:
+
 * the audio is cut up into 10ms chunks called frames
 * the frame is transformed, using signal processing, into a condensed set of features (a typical feature set might be 40 mel-frequency cepstral coefficients, with 7 frames of context on each side)
 * the features are then fed into the acoustic model (typically a deep neural network), which outputs the likelihoods of each phoneme.
@@ -94,7 +90,7 @@ Training acoustic models requires significant amounts of data. Hundreds of hours
 
 Language models are often the biggest factor in determining whether a particular application works welll or terribly. If you want to build a system to talk about music, and you use a language model trained on eighteenth century romance novels, the output will be funny but totally useless.
 
-Modern language models take a large volume of text and train a generative model. For every sentence, the model will produce a likelihood score. This score can then be used to say that one sentence is  more likely than another. A simple approach is N-gram language models. In 3-gram language modeling, for example, we count every 3 word sequence in our training data. The probability of any three word sequence is then the frequency of that sequence divided by the number of sequences in our training data. (This is an extreme simplification; more depth will be provided in a future blog post.) The probability of a candidate sentence is then the product of the probability of every 3 word sequence in our sentence. If the sentence is "the cat in the hat", the probability is: P("the" \| start-of-sentence")*P("cat" \| "the", start-of-sentence)*P("in"\|"cat", "the")*P("the"\|"in", "cat")*P("hat"\|"the", "in").
+Modern language models take a large volume of text and train a generative model. For every sentence, the model will produce a likelihood score. This score can then be used to say that one sentence is  more likely than another. A simple approach is N-gram language models. In 3-gram language modeling, for example, we count every 3 word sequence in our training data. The probability of any three word sequence is then the frequency of that sequence divided by the number of sequences in our training data. (This is an extreme simplification; more depth will be provided in a future blog post.) The probability of a candidate sentence is then the product of the probability of every 3 word sequence in our sentence. If the sentence is "the cat in the hat", the probability is: P("the" \| start-of-sentence")\*P("cat" \| "the", start-of-sentence)\*P("in"\|"cat", "the")\*P("the"\|"in", "cat")\*P("hat"\|"the", "in").
 
 This explanation leaves out a number of important topics: handling of "unseen" word sequences; langauge model smoothing; interpolating multiple language models; more complicated language model approaches like recurrent neural network language models, and many other details.
 ## <a name='lex'></a>Pronunciation and the Lexicon
