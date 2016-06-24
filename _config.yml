@@ -15,7 +15,7 @@ description: > # this means to ignore newlines until "baseurl:"
   With over a century of experience, we helped build the Amazon Echo, Dragon Naturally Speaking,
   Siri, and a host of other world changing systems.  
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://127.0.0.1:4000/"
+url: "https://cobalt-paul.github.io/cobalt-blog/"
 twitter_username: cobaltspeech
 github_username:  cobaltspeech
 
