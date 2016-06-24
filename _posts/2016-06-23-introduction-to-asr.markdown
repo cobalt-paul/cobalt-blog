@@ -62,9 +62,9 @@ This explanation is heavily simplified, and diving into the details will make ma
 
 An acoustic model works roughly like this:
 
-* the audio is cut up into 10ms chunks called frames
-* the frame is transformed, using signal processing, into a condensed set of features (a typical feature set might be 40 mel-frequency cepstral coefficients, with 7 frames of context on each side)
-* the features are then fed into the acoustic model (typically a deep neural network), which outputs the likelihoods of each phoneme.
+* the audio is cut up into chunks every 10 ms called frames
+* the frame is transformed, using signal processing, into a condensed set of features (a typical feature set might be, e.g., 40 mel-frequency cepstral coefficients, with 7 frames of context on each side)
+* the features are then fed into the acoustic model (commonly a deep neural network [1]), which outputs the likelihoods of each phoneme.
 
 There are some important simplifications in this explanation. First, there are other approaches, most notably "connectionist temporal classification" approaches, which are currently transition from research into industry. A later section will discuss this approach. Second, the output targets of a typical feed-forward deep neural network acoustic model are actually context-dependent targets in a phonetic tree, but conceptually it's reasonable to just thing of the model as producing phone likelihoods.
 
@@ -109,10 +109,21 @@ A naive way to find the most likely sentence is to calculate a score for every p
 TODO: insert a discussion of WFSTs, HMMs, viterbi search, beam pruning
 
 
-## <a name='ctclstm'></a>Connectionist Temporal Classification, LSTM-RNNs
-Do I really need to cover this?
 ## <a name='other'></a>Other Problems
 ## <a name='furtherreading'></a>Further Reading
+Acoustic model research is a very active subfield. "Connectionist Temporal Classification" acoustic models built using LSTM RNNs are making their way into industrial use [2], and convolutional neural networks [3] and time-delay neural networks [4] are two important other approaches receiving active research.
 
+The definitive review of N-gram language modeling is [5]. N-gram language models typically relay on modified Kneser-Ney language model smoothing[6]; different smoothing techniques are well reviewed in [7]. Language modeling research suffers from a need for fast models that can be precompiled into the WFST framework, but "second-pass rescoring" [8] using RNN language models, sparse non-negative matrix factorization [9], and other approaches is popular. 
+
+The best open source speech recognition toolkit is Kaldi, although it is designed for researchers and can be challenging for the uninitiated to use. Cobalt specialize in novel and unusual custom-built production quality speech and language solutions, if you need help or just want to build something crazy :).  
 
 [0] http://web.ece.ucsb.edu/Faculty/Rabiner/ece259/Reprints/354_LALI-ASRHistory-final-10-8.pdf
+[1] http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/38131.pdf
+[2]
+[3]
+[4]
+[5]
+[6]
+[7]
+[8]
+[9]
