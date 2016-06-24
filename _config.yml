@@ -1,0 +1,23 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Cobalt Speech and Language 
+email: blog@cobaltspeech.com 
+description: > # this means to ignore newlines until "baseurl:"
+  Speech and language is the most advanced trait of the most advanced species on Earth.
+  Cobalt's team of scientists and engineers research, design and implement production-ready
+  solutions for problems in speech and language, specializing in novel and unusual applications.
+  With over a century of experience, we helped build the Amazon Echo, Dragon Naturally Speaking,
+  Siri, and a host of other world changing systems.  
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://127.0.0.1:4000/"
+twitter_username: cobaltspeech
+github_username:  cobaltspeech
+
+# Build settings
+markdown: kramdown
